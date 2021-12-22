@@ -1,22 +1,41 @@
 {
-    "name": "cayetanosoriano/hashids-bundle",
-    "description": "Bundle for integration of hashids lib to the container",
-    "keywords": ["hashids"],
-    "type": "symfony-bundle",
-    "minimum-stability": "stable",
-    "license": "MIT",
-    "require": {
-        "hashids/hashids": "~1.0",
-        "symfony/framework-bundle": ">= 2.1.0"
-        },
-    "authors": [
-        {
-            "name": "Cayetano Soriano",
-            "email": "neoshadybeat@gmail.com"
-        }
-    ],
-    "autoload": {
-        "psr-0": { "cayetanosoriano\\HashidsBundle": "" }
+  "name": "gal-digital-gmbh/hashids-bundle",
+  "version": "2.0.0",
+  "type": "symfony-bundle",
+  "description": "Symfony bundle integrating hashids",
+  "keywords": [
+    "symfony",
+    "hashids"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Christian Flack",
+      "email": "christian.flack@gal-digital.de"
     },
-    "target-dir": "cayetanosoriano/HashidsBundle"
+    {
+      "name": "Cayetano Soriano",
+      "email": "neoshadybeat@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=8",
+    "hashids/hashids": "^4.1",
+    "symfony/framework-bundle": "^5.0|^6.0",
+    "twig/twig": "^3.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.4",
+    "phpstan/phpstan": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "GalDigitalGmbh\\HashidsBundle\\": "src"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.0-dev"
+    }
+  }
 }

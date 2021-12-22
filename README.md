@@ -1,136 +1,67 @@
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/3ad118ec-c1b8-44e1-b92c-c51369a52bc3/mini.png)](https://insight.sensiolabs.com/projects/3ad118ec-c1b8-44e1-b92c-c51369a52bc3)
+# Symfony hashids bundle
 
-hashidsBundle
-=============
-
-## This is a bundle to use http://www.hashids.org/ as a service
+This bundle integrates [hashids.org](https://hashids.org) as a service  
+This repository was forked, updated, and heavily edited from the original [here](https://github.com/neoshadybeat/hashidsBundle)
 
 ## Installation
 
-#### Symfony 2.1.x <= 2.4.x: Composer
-
-[Composer](http://packagist.org/about-composer) is a project dependency manager for PHP. You have to list
-your dependencies in a `composer.json` file:
-
-```json
-{
-    "require": {
-        "cayetanosoriano/hashids-bundle": "dev-master"
-    }
-}
-```
-To actually install in your project, download the composer binary and run it:
+### Composer
 
 ```bash
-wget http://getcomposer.org/composer.phar
-# or
-curl -O http://getcomposer.org/composer.phar
-
-php composer.phar install
+composer require gal-digital-gmbh/hashids-bundle
 ```
 
-### Step 2: Enable the bundle
-
-Finally, enable the bundle in the kernel:
+### Enable the bundle
 
 ```php
 <?php
-// app/AppKernel.php
+// config/bundles.php
 
-public function registerBundles()
-{
-    $bundles = array(
-        // ...
-
-            new cayetanosoriano\HashidsBundle\cayetanosorianoHashidsBundle(),
-    );
+return [
+    GalDigitalGmbh\HashidsBundle\HashidsBundle::class => ['all' => true],
+    // ...
 }
 ```
 
 ## Configuration
 
-### Add the following to your config.yml
 ```yaml
-cayetanosoriano_hashids:
-    salt: "randomsalt" #optional
-    min_hash_length: 10 #optional
-    alphabet: "abcd..." #optional
+# These configs are optional
+hashids:
+  salt: 'randomsalt'
+  min_hash_length: 10
+  alphabet: 'abcd...'
 ```
 
-### Then use the service
-```php
-$kcy = $this->get('hashids');
-```
+## Service
 
-## Optional features
+Use the service `GalDigitalGmbh\HashidsBundle\Service\HashService` for simpler one-to-one ID conversions,
+but you can also use `Hashids\Hashids` as a service directly.
 
-### Doctrine param converter
+## Twig extension
 
-The included Doctrine param converter extends the one included in
-(SensioFrameworkExtraBundle)[http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html]
-to automate decoding of Hashids in routes before fetching the object.
+### Available filters
 
-#### Overload the default service to your services.yml
+| Name                   | Description                      |
+| ---------------------- | -------------------------------- |
+| hashid_encode          | Encodes one ID to string         |
+| hashid_decode          | Decodes a string to one ID       |
+| hashid_encode_multiple | Encodes multiple IDs to string   |
+| hashid_decode_multiple | Decodes a string to multiple IDs |
 
-```yaml
-sensio_framework_extra.converter.doctrine.orm:
-    class: cayetanosoriano\HashidsBundle\Request\ParamConverter\HashidsDoctrineParamConverter
-    arguments: ["@hashids", "@doctrine"]
-    tags: [{ name: request.param_converter, converter: doctrine.orm }]
-```
+### Usage example
 
-#### Specify the Hashid in your route
-
-The following two examples are equivalent, using either the raw database `id` or
-the Hashid encoded version.
-
-##### Raw `id` (standard SensioFrameworkExtraBundle behaviour)
-
-```php
-/**
- * @Route("/user/{id}", requirements={"id"="\d+"}, name="user_view")
- */
-public function viewAction(User $user)
-{
-…
-}
-```
-
-##### Hashid
-
-The `hashid` request parameter will be automatically recognised as an encoded
-version of `id`.
-
-```php
-/**
- * @Route("/user/{hashid}", requirements={"hashid"="[A-Za-z0-9_-]+"}, name="user_view")
- */
-public function viewAction(User $user)
-{
-…
-}
-```
-
-### license
-=======
-### Twig extension
-
-#### Declare the service to your services.yml
-```yaml
-twig.hashids_extension:
-    class: cayetanosoriano\HashidsBundle\Twig\HashidsExtension
-    arguments: ["@hashids"]
-    public: false
-    tags: [{ name: twig.extension }]
-```
-
-#### Use the extension in your Twig templates
 ```twig
-<a href="{{ path('user_profile', {'hashid': user.id|hashid_encode}) }}">View Profile</a>
+<a href="{{- path('user_profile', {
+  hashid: user.id|hashid_encode,
+}) -}}">View Profile</a>
 ```
 
-### License
-```
+## Original license
+
+> This repository was forked, updated, and heavily edited from the original [here](https://github.com/neoshadybeat/hashidsBundle)
+
+```text
 Copyright (c) 2015 neoshadybeat[at]gmail.com
 
 Permission to use, copy, modify, and/or distribute this software for any
