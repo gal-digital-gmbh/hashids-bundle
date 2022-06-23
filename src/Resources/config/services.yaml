@@ -10,6 +10,9 @@ services:
       - '%hashids.min_hash_length%'
       - '%hashids.alphabet%'
 
+  GalDigitalGmbh\HashidsBundle\Command\:
+    resource: '../../Command'
+
   GalDigitalGmbh\HashidsBundle\Service\:
     resource: '../../Service'
 
