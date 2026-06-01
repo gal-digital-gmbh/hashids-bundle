@@ -1,6 +1,6 @@
 {
   "name": "gal-digital-gmbh/hashids-bundle",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "type": "symfony-bundle",
   "description": "Symfony bundle integrating hashids",
   "keywords": [
@@ -21,7 +21,7 @@
   "require": {
     "php": ">=8",
     "hashids/hashids": "^4.1",
-    "symfony/framework-bundle": "^5.0|^6.0",
+    "symfony/framework-bundle": "^5.0|^6.0|^7.0",
     "twig/twig": "^3.0"
   },
   "require-dev": {
