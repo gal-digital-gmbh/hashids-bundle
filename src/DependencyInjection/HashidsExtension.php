@@ -11,10 +11,8 @@ class HashidsExtension extends Extension
 {
     /**
      * @param mixed[] $configs
-     *
-     * @return void
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
 

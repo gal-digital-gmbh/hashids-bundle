@@ -10,8 +10,7 @@ class HashidsExtension extends AbstractExtension
 {
     public function __construct(
         private HashService $hashService,
-    ) {
-    }
+    ) {}
 
     public function getFilters(): array
     {
