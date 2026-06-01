@@ -8,8 +8,7 @@ class HashService
 {
     public function __construct(
         private Hashids $hashids,
-    ) {
-    }
+    ) {}
 
     public function encode(int $id): string
     {
